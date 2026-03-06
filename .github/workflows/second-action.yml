@@ -30,4 +30,4 @@ jobs:
       - name: Build Project
         run: |
           cd second-action
-          npm build
+          npm run build
