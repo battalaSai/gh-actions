@@ -18,5 +18,16 @@ jobs:
         run: |
           cd second-action
           npm test
-        
-        
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v6
+      - name: get dependancies
+        run: |
+          cd second-action
+          npm ci
+      - name: Build Project
+        run: |
+          cd second-action
+          npm build
