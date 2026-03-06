@@ -12,7 +12,8 @@ jobs:
         uses: actions/checkout@v6
       - name: get dependancies
         run: |
-          cd second-action
+          ls
+          #cd second-action
           npm ci
       - name: run tests
         run: |
