@@ -1,0 +1,22 @@
+name: Test npm project
+on:
+  push:
+    branches:
+      - main
+      - second-workflow
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v6
+      - name: get dependancies
+        run: |
+          cd second-action
+          npm ci
+      - name: run tests
+        run: |
+          cd second-action
+          npm test
+        
+        
