@@ -2,7 +2,6 @@ name: Test npm project
 on:
   push:
     branches:
-      - main
       - second-workflow
 jobs:
   tests:

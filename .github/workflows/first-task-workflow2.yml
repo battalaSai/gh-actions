@@ -1,0 +1,10 @@
+name: Run when issue is raised
+on:
+  issues: 
+    types: [opened, reopened, labeled]
+jobs:
+  env:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Environment
+        run: echo "${{ toJSON(github) }}"

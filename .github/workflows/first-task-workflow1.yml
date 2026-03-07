@@ -1,0 +1,28 @@
+name: Test and Deploy
+on:
+  push:
+    branches:
+      - first_problem
+jobs:
+  Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Install Dependancies
+        run: |
+          cd tasks/first-task/
+          npm ci
+      - name: lint
+        run: |
+          cd tasks/first-task/
+          npm run lint
+      - name: test
+        run: |
+          cd tasks/first-task/
+          npm test
+      - name: deploy
+        run: |
+          cd tasks/first-task/
+          npm run build
+    
