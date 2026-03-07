@@ -1,28 +1,34 @@
-name: Test and Deploy
+name: Deploy website
 on:
   push:
     branches:
-      - first_problem
+      - main
 jobs:
-  Deploy:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Get code
         uses: actions/checkout@v6
-      - name: Install Dependancies
-        run: |
-          cd tasks/first-task/
-          npm ci
-      - name: lint
-        run: |
-          cd tasks/first-task/
-          npm run lint
-      - name: test
-        run: |
-          cd tasks/first-task/
-          npm test
-      - name: deploy
-        run: |
-          cd tasks/first-task/
-          npm run build
+      - name: Install dependencies
+        run: npm ci
+      - name: Lint code
+        run: npm run lint
+      - name: Test code
+        run: npm run test
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v6
+      - name: Install dependencies
+        run: npm ci
+      - name: Build website
+        run: npm run build
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        run: echo "Deploying..."
     
