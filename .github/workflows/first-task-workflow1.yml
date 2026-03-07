@@ -13,12 +13,16 @@ jobs:
         run: |
           cd tasks/first-task/
           npm ci
+      - name: lint
+        run: |
+          cd tasks/first-task/
+          npm run lint
       - name: test
         run: |
           cd tasks/first-task/
-          lint test
+          npm test
       - name: deploy
         run: |
           cd tasks/first-task/
-          lint build
+          npm run build
     
