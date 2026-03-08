@@ -36,7 +36,7 @@ jobs:
           cd tasks/first-task/
           npm run build
       - name: Upload artifacts
-        uses: actions/upload-artifacts@v6
+        uses: actions/upload-artifact@v6
         with:
           name: dist-files
           path: tasks/first-task/dist
@@ -45,7 +45,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Get Build Artifacts
-        uses: actions/download-artifacts@v6
+        uses: actions/download-artifact@v7
         with:
           name: dist-files
       - name: Output
