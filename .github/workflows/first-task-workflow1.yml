@@ -35,10 +35,21 @@ jobs:
         run: |
           cd tasks/first-task/
           npm run build
+      - name: Upload artifacts
+        uses: actions/upload-artifacts@v6
+        with:
+          name: dist-files
+          path: tasks/first-task/dist
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Get Build Artifacts
+        uses: actions/download-artifacts@v6
+        with:
+          name: dist-files
+      - name: Output
+        run: ls
       - name: Deploy
         run: echo "Deploying..."
     
