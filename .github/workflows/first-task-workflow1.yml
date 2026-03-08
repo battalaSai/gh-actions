@@ -24,6 +24,8 @@ jobs:
   build:
     needs: test
     runs-on: ubuntu-latest
+    outputs:
+      script-file: ${{ steps.publish.outputs.file }}
     steps:
       - name: Get code
         uses: actions/checkout@v6
@@ -35,6 +37,9 @@ jobs:
         run: |
           cd tasks/first-task/
           npm run build
+      - name: Publish required value
+        id: publish
+        run: find tasks/first-task/dists/assets/*.js -type f -execdir echo 'file={}' >> $GITHUB_OUTPUT ';'
       - name: Upload artifacts
         uses: actions/upload-artifact@v6
         with:
@@ -51,5 +56,5 @@ jobs:
       - name: Output
         run: ls
       - name: Deploy
-        run: echo "Deploying..."
+        run: echo "${{ needs.build.outputs.script-file }}"
     
